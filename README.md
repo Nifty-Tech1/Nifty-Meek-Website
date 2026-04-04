@@ -22,4 +22,4 @@ building, testing, failing, and learning in public.
 
 ## Live
 
-[Your deployed link]
+[https://niftymeek.vercel.app]
