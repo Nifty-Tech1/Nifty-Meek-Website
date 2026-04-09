@@ -10,7 +10,7 @@ const stats = [
     color: "from-blue-500",
   },
   {
-    label: "Ideas Shipped",
+    label: "Ideas Tested",
     value: "100+",
     icon: "✨",
     color: "from-purple-500",

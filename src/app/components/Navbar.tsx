@@ -27,7 +27,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
           <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-accent to-blue-600 flex items-center justify-center">
-            <span className="text-white font-bold text-lg">N</span>
+            <span className="text-white font-bold text-lg">NM</span>
           </div>
           <span className="font-semibold text-lg hidden sm:inline">
             Nifty Meek

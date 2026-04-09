@@ -26,7 +26,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-accent to-blue-600 flex items-center justify-center">
-                <span className="text-white font-bold">N</span>
+                <span className="text-white font-bold">NM</span>
               </div>
               <span className="font-semibold">Nifty Meek</span>
             </div>
