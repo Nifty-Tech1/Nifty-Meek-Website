@@ -2,6 +2,23 @@ import LogsPreview from "../../app/components/LogsPreview";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
+export const metadata = {
+  title: "Insights & Logs | Nifty Meek",
+  description:
+    "Real-time updates on progress, experiments, failures, and wins. Building in public with weekly logs and insights.",
+  openGraph: {
+    title: "Insights & Logs | Nifty Meek",
+    description:
+      "Real-time updates on progress, experiments, failures, and wins. Building in public.",
+    url: "https://niftymeek.vercel.app/blog",
+    type: "website",
+  },
+  twitter: {
+    title: "Insights & Logs | Nifty Meek",
+    description: "Real-time updates on progress and building in public.",
+  },
+};
+
 export default function BlogPage() {
   return (
     <main className="text-white">

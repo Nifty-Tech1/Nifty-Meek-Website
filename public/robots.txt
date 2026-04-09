@@ -1,0 +1,21 @@
+# Robots.txt for Nifty Meek
+User-agent: *
+Allow: /
+Allow: /projects
+Allow: /blog
+Allow: /contact
+Disallow: /admin
+Disallow: /login
+Disallow: /*.json$
+Disallow: /api/
+
+# Crawl delay
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://niftymeek.vercel.app/sitemap.xml
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0

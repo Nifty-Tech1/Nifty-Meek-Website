@@ -5,6 +5,24 @@ import ProjectsGrid from "../components/ProjectsGrid";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Projects | Nifty Meek",
+  description:
+    "Portfolio of production systems and projects built in public. View live projects, experiments, and case studies.",
+  openGraph: {
+    title: "Projects | Nifty Meek",
+    description:
+      "Portfolio of production systems and projects built in public.",
+    url: "https://niftymeek.vercel.app/projects",
+    type: "website",
+  },
+  twitter: {
+    title: "Projects | Nifty Meek",
+    description:
+      "Portfolio of production systems and projects built in public.",
+  },
+};
+
 export default async function ProjectsPage() {
   const supabase = await getServerSupabase();
 
