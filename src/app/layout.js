@@ -1,5 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
+import Footer from "./components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,6 +27,8 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col">
         <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05),transparent)]" />
         {children}
+        <Toaster position="top-right" richColors closeButton />
+        <Footer />
       </body>
     </html>
   );

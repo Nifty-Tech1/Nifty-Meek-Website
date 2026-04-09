@@ -1,44 +1,69 @@
-import { getServerSupabase } from "../../lib/auth";
-import ReactMarkdown from "react-markdown";
+"use client";
 
-export const dynamic = "force-dynamic";
+import { useEffect, useState } from "react";
+import { getSupabase } from "../../lib/supabase";
 
-export default async function LogsPreview() {
-  const supabase = await getServerSupabase();
+export default function LogsPreview() {
+  const [logs, setLogs] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const { data: logs } = await supabase
-    .from("logs")
-    .select("*")
-    .order("created_at", { ascending: false });
+  useEffect(() => {
+    const supabase = getSupabase();
+
+    const fetchLogs = async () => {
+      const { data } = await supabase
+        .from("logs")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      setLogs(data || []);
+      setLoading(false);
+    };
+
+    fetchLogs();
+
+    const channel = supabase
+      .channel("logs-changes")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "logs" },
+        () => {
+          fetchLogs();
+        },
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
 
   return (
-    <section className="px-10 py-24 max-w-4xl mx-auto">
-      <h2 className="text-4xl font-bold mb-16 text-center">Build Timeline</h2>
+    <section className="px-10 py-20">
+      <h2 className="text-3xl font-bold mb-10">Build Logs</h2>
 
-      <div className="relative border-l border-white/10 pl-10 space-y-16">
-        {logs?.map((log) => (
-          <div key={log.id} className="relative">
-            {/* Dot */}
-            <div className="absolute -left-[42px] top-2 w-4 h-4 bg-white rounded-full" />
+      {/* ✅ Loading */}
+      {loading && <p className="text-gray-400">Loading logs...</p>}
 
-            {/* Card */}
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur">
-              <div className="flex justify-between items-center mb-3">
-                <h3 className="text-xl font-semibold">{log.title}</h3>
+      {/* ✅ Empty state */}
+      {!loading && logs.length === 0 && (
+        <p className="text-gray-500">No logs yet.</p>
+      )}
 
-                <span className="text-xs px-3 py-1 rounded-full bg-white/10">
-                  {log.tag}
-                </span>
-              </div>
+      {/* ✅ Logs */}
+      <div className="space-y-6 max-w-2xl mx-auto">
+        {logs.map((log) => (
+          <div
+            key={log.id}
+            className="p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur hover:border-white/20 transition"
+          >
+            <h3 className="font-semibold">{log.title}</h3>
 
-              <div className="prose prose-invert max-w-none text-gray-300">
-                <ReactMarkdown>{log.content}</ReactMarkdown>
-              </div>
+            <p className="text-gray-400 mt-2">{log.content}</p>
 
-              <p className="text-xs text-gray-500 mt-4">
-                {new Date(log.created_at).toLocaleDateString()}
-              </p>
-            </div>
+            <span className="text-xs text-gray-500 mt-3 block">
+              {new Date(log.created_at).toLocaleDateString()}
+            </span>
           </div>
         ))}
       </div>

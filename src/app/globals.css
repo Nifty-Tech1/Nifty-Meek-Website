@@ -1,30 +1,243 @@
 @import "tailwindcss";
 
+/* Elite Design System */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Light/Dark */
+  --background: #0a0a0a;
+  --surface: #0f0f0f;
+  --surface-light: #1a1a1a;
+  --foreground: #ffffff;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* Accent - Professional Blue */
+  --accent: #0066ff;
+  --accent-hover: #0052cc;
+
+  /* Neutrals */
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --text-tertiary: #666666;
+
+  /* Borders */
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-color-hover: rgba(255, 255, 255, 0.15);
+
+  /* Utilities */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #f8f8f8;
+    --surface: #ffffff;
+    --surface-light: #f3f3f3;
+    --foreground: #0a0a0a;
+    --text-primary: #0a0a0a;
+    --text-secondary: #5a5a5a;
+    --text-tertiary: #999999;
+    --border-color: rgba(0, 0, 0, 0.08);
+    --border-color-hover: rgba(0, 0, 0, 0.15);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Define Custom Utilities First */
+/* These are plain CSS classes, not Tailwind utilities */
+.text-accent {
+  color: var(--accent);
+}
+
+.text-accent-hover {
+  color: var(--accent-hover);
+}
+
+.text-text-primary {
+  color: var(--text-primary);
+}
+
+.text-text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-text-tertiary {
+  color: var(--text-tertiary);
+}
+
+.bg-surface {
+  background-color: var(--surface);
+}
+
+.bg-surface-light {
+  background-color: var(--surface-light);
+}
+
+.border-border-color {
+  border-color: var(--border-color);
+}
+
+/* Reset & Base Styles */
+* {
+  @apply transition-colors duration-200;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--text-primary);
+  font-family:
+    var(--font-sans),
+    system-ui,
+    -apple-system,
+    sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-bold tracking-tight;
+}
+
+h1 {
+  @apply text-4xl md:text-6xl lg:text-7xl;
+}
+
+h2 {
+  @apply text-3xl md:text-5xl;
+}
+
+h3 {
+  @apply text-2xl md:text-3xl;
+}
+
+/* Links */
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* Form Elements */
+input,
+textarea,
+select {
+  background-color: var(--surface-light);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  color: var(--text-primary);
+}
+
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+  color: var(--text-tertiary);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent) / 0.2;
+}
+
+button {
+  @apply transition-all duration-200;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Selection */
+::selection {
+  background: var(--accent);
+  background-opacity: 0.3;
+  color: var(--text-primary);
+}
+
+/* Utility Classes */
+.glass {
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+}
+
+.glass-light {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+}
+
+.gradient-text {
+  background: linear-gradient(to right, var(--accent), var(--accent), #60a5fa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-border {
+  position: relative;
+  background: linear-gradient(
+    to right,
+    var(--accent) / 0.5,
+    rgba(255, 255, 255, 0.1),
+    var(--accent) / 0.5
+  );
+  border-radius: 1.5rem;
+  padding: 1px;
+}
+
+.fade-in {
+  animation: fade-in 0.6s ease-out;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.blob {
+  @apply absolute blur-[120px] rounded-full pointer-events-none;
 }
