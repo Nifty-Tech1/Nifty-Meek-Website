@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getSupabase } from "../../lib/supabase";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
@@ -12,7 +13,7 @@ interface MediaItem {
   category: string;
 }
 
-const mediaGallery: MediaItem[] = [
+/* const mediaGallery: MediaItem[] = [
   {
     id: "1",
     type: "image",
@@ -61,11 +62,31 @@ const mediaGallery: MediaItem[] = [
     description: "Cloud deployment",
     category: "Architecture",
   },
-];
+]; */
 
 export default function MediaGallery() {
+  const [mediaGallery, setMediaGallery] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedMedia, setSelectedMedia] = useState<MediaItem | null>(null);
+
+  useEffect(() => {
+    async function fetchProjects() {
+      const supabase = getSupabase();
+      const { data, error } = await supabase
+        .from("projects")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      // In MediaGallery.tsx, add:
+      const { data: images } = await supabase
+        .from("images")
+        .select("*")
+        .order("created_at", { ascending: false });
+      if (!error) setMediaGallery(data || []);
+    }
+
+    fetchProjects();
+  }, []);
 
   const categories = [
     "All",

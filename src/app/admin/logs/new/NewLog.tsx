@@ -85,14 +85,14 @@ export default function NewLog() {
       setLoading(false);
     }
   };
-
   return (
-    <div className="relative h-screen flex flex-col justify-center items-center text-center px-6 overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 text-white">
-      <div className="w-full max-w-lg p-10 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm">
-        <h1 className="text-3xl font-bold mb-2">New Log Entry</h1>
-        <p className="text-white/60 mb-8">Share what's happening</p>
+    <div className="relative min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 text-white">
+      <div className="mt-6 w-full max-w-md sm:max-w-lg p-6 sm:p-10 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm">
+        <h1 className="text-xl font-bold mb-2">New Entry</h1>
+        <p className="text-white/60 mb-4">Share what's happening</p>
 
         <div className="space-y-4">
+          {/* TITLE */}
           <div className="text-left">
             <label className="text-sm text-white/70 block mb-2">Title</label>
             <input
@@ -108,10 +108,11 @@ export default function NewLog() {
             </p>
           </div>
 
+          {/* CONTENT */}
           <div className="text-left">
             <label className="text-sm text-white/70 block mb-2">Content</label>
             <textarea
-              className="w-full p-3 text-white bg-slate-800 rounded-2xl border border-white/10 focus:border-white/30 focus:outline-none transition h-32 resize-none"
+              className="w-full p-3 text-white bg-slate-800 rounded-2xl border border-white/10 focus:border-white/30 focus:outline-none transition h-28 sm:h-32 resize-none"
               placeholder="Tell the full story..."
               value={content}
               onChange={(e) => setContent(e.target.value)}
@@ -123,6 +124,7 @@ export default function NewLog() {
             </p>
           </div>
 
+          {/* TAG */}
           <div className="text-left">
             <label className="text-sm text-white/70 block mb-2">Tag</label>
             <select
@@ -138,18 +140,20 @@ export default function NewLog() {
             </select>
           </div>
 
-          <div className="flex gap-3 pt-4">
+          {/* BUTTONS */}
+          <div className="flex flex-col sm:flex-row gap-3 pt-4">
             <button
               disabled={loading}
               onClick={createLog}
-              className="flex-1 px-8 py-3 bg-white text-black rounded-2xl font-semibold hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed transition"
+              className="flex-1 px-6 sm:px-8 py-3 bg-white text-black rounded-2xl font-semibold hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed transition"
             >
               {loading ? "Creating..." : "Create Log"}
             </button>
+
             <button
               disabled={loading}
               onClick={() => router.back()}
-              className="px-8 py-3 bg-white/10 text-white rounded-2xl font-semibold hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed transition"
+              className="px-6 sm:px-8 py-3 bg-white/10 text-white rounded-2xl font-semibold hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed transition"
             >
               Cancel
             </button>

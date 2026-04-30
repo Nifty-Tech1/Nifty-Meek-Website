@@ -47,7 +47,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nifty Meek | Building Real Systems in Public",
+    title: "Nifty Meek | Building scalable systems from Zambia — publicly",
     description:
       "Nifty Meek builds production systems and documents the entire journey.",
     images: ["https://niftymeek.vercel.app/og-image.png"],
@@ -64,7 +64,7 @@ export const metadata = {
     },
   },
   verification: {
-    google: "your-google-site-verification-code",
+    google: "google2a0822cefe2ac159",
   },
 };
 
